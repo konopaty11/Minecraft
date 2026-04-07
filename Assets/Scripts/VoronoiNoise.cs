@@ -28,8 +28,11 @@ public class VoronoiNoise : MonoBehaviour
         {
             float dx = x - p.x;
             float dy = y - p.y;
+
             float dist = dx * dx + dy * dy;
-            if (dist < minDist) minDist = dist;
+
+            if (dist < minDist) 
+                minDist = dist;
         }
 
         return Mathf.Sqrt(minDist);
