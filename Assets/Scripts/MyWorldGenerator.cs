@@ -6,7 +6,7 @@ public class MyWorldGenerator : MonoBehaviour
 {
     [SerializeField] int countBioms;
     [SerializeField] int countVariantsBioms;
-    [SerializeField] TerrainPainter terrainPainter;
+    [SerializeField] TerrainController terrainPainter;
 
     void Start()
     {
@@ -26,6 +26,6 @@ public class MyWorldGenerator : MonoBehaviour
     public void GenerateWorld()
     {
         int[,] map = MyVoronoi.GenerateMap(new(400, 600), countBioms, countVariantsBioms);
-        terrainPainter.Paint(map);
+        terrainPainter.SetBioms(map);
     }
 }
