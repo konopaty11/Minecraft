@@ -4,12 +4,12 @@ using UnityEngine;
 
 public static class MyVoronoi
 {
-    static List<Vector2Int> _points = new();
+    static List<Point> _points = new();
     static int[,] _map;
 
-    public static int[,] GenerateMap(Vector2Int mapSize, int pointsCount)
+    public static int[,] GenerateMap(Vector2Int mapSize, int countPoints, int countPointVariants)
     {
-        GeneratePoints(mapSize, pointsCount);
+        GeneratePoints(mapSize, countPoints, countPointVariants);
 
         _map = new int[mapSize.x, mapSize.y];
         for (int x = 0; x < mapSize.x; x++)
@@ -21,13 +21,14 @@ public static class MyVoronoi
         return _map;
     }
 
-    static void GeneratePoints(Vector2Int mapSize, int pointsCount)
+    static void GeneratePoints(Vector2Int mapSize, int countPoints, int countPointVariants)
     {
-        for (int _ = 0; _ < pointsCount; _++)
+        for (int _ = 0; _ < countPoints; _++)
         {
             int x = Random.Range(0, mapSize.x);
             int y = Random.Range(0, mapSize.y);
-            _points.Add(new Vector2Int(x, y));
+            Point point = new(new Vector2Int(x, y), Random.Range(0, countPointVariants));
+            _points.Add(point);
         }
     }
 
@@ -38,14 +39,26 @@ public static class MyVoronoi
 
         for (int i = 0; i < _points.Count; i++)
         {
-            float distance = Vector2Int.Distance(mapPoint, _points[i]);
+            float distance = Vector2Int.Distance(mapPoint, _points[i].position);
             if (distance < minDistance)
             {
                 minDistance = distance;
-                closestIndex = i;
+                closestIndex = _points[i].index;
             }
         }
 
         return closestIndex;
+    }
+}
+
+class Point
+{
+    public Vector2Int position;
+    public int index;
+
+    public Point(Vector2Int position, int index)
+    {
+        this.position = position;
+        this.index = index;
     }
 }

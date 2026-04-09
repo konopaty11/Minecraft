@@ -16,11 +16,12 @@ public class TerrainPainter : MonoBehaviour
 
     void Initialize()
     {
-        terrainData = terrain.terrainData;
     }
 
     public void Paint(int[,] map)
     {
+        terrainData = terrain.terrainData;
+
         int alphaWidth = terrainData.alphamapWidth;
         int alphaHeight = terrainData.alphamapHeight;
         int layers = terrainData.alphamapLayers;
