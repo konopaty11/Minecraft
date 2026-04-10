@@ -32,8 +32,6 @@ public class JoystickController : MonoBehaviour, IDragHandler, IEndDragHandler
         float clampedDistance = Mathf.Clamp(distance, 0f, maxDistance);
         Direction = (targetPosition - _startPosition).normalized;
 
-        Debug.Log($"{eventData.delta} -- {clampedDistance} -- {Direction}");
-
         Movement = Direction * clampedDistance;
         _joystick.anchoredPosition = _startPosition + Movement;
     }

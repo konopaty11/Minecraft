@@ -1,6 +1,35 @@
 {
-    "version": 0,
+    "version": 1,
     "name": "InputActions",
-    "maps": [],
+    "maps": [
+        {
+            "name": "Player",
+            "id": "8aa2a923-740a-4870-8242-7b6be5033cb4",
+            "actions": [
+                {
+                    "name": "Touch",
+                    "type": "Value",
+                    "id": "337e55ba-d7b8-4967-bebd-f77957a505b4",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "94c14835-6adf-401a-96b2-cf87a89157dd",
+                    "path": "<Pointer>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Touch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
     "controlSchemes": []
 }

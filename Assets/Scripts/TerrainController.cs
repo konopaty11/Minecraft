@@ -7,7 +7,8 @@ public class TerrainController : MonoBehaviour
 {
     [SerializeField] Terrain terrain;
 
-    TerrainData terrainData;
+    public TerrainData TerrainData { get; private set; }
+    public Vector3 TerrainPosition { get; private set; }
     
     void Start()
     {
@@ -16,16 +17,18 @@ public class TerrainController : MonoBehaviour
 
     void Initialize()
     {
+        TerrainData = terrain.terrainData;
+        TerrainPosition = terrain.transform.position;
     }
 
     public void SetBioms(int[,] map)
     {
-        terrainData = terrain.terrainData;
+        TerrainData = terrain.terrainData;
 
-        int alphaWidth = terrainData.alphamapWidth;
-        int alphaHeight = terrainData.alphamapHeight;
-        int heightmapResolution = terrainData.heightmapResolution;
-        int layers = terrainData.alphamapLayers;
+        int alphaWidth = TerrainData.alphamapWidth;
+        int alphaHeight = TerrainData.alphamapHeight;
+        int heightmapResolution = TerrainData.heightmapResolution;
+        int layers = TerrainData.alphamapLayers;
 
         float[,,] alphaMap = new float[alphaWidth, alphaHeight, layers];
         float[,] heightMap = new float[heightmapResolution, heightmapResolution];
@@ -75,12 +78,18 @@ public class TerrainController : MonoBehaviour
                 heightMap[x, y] = height;
             }
 
-        terrainData.SetAlphamaps(0, 0, alphaMap);
-        terrainData.SetHeights(0, 0, heightMap);
+        TerrainData.SetAlphamaps(0, 0, alphaMap);
+        TerrainData.SetHeights(0, 0, heightMap);
     }
 
-    public void SetHeight(int[,] map)
+    public float GetHeight(Vector3 position)
     {
+        return terrain.SampleHeight(position);
+    }
 
+
+    public float[,,] GetAlphamaps()
+    {
+        return TerrainData.GetAlphamaps(0, 0, TerrainData.alphamapWidth, TerrainData.alphamapHeight);
     }
 }
